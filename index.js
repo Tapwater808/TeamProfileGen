@@ -1,18 +1,19 @@
+//requirements for running
 const Manager = require("./libs/Manager");
 const Engineer = require("./libs/Engineer");
 const Intern = require("./libs/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-
+//output directory
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
-
+//rendering requirement
 const render = require("./libs/htmlRenderer");
 
 const teamMembers = [];
 const emptyId = [];
-
+//First question is always has min 1 manager.
 const questionsEmployee = [
     {
         type: "input",
@@ -46,7 +47,7 @@ function manager() {
         team();
     });
 };
-
+//function for more members
 function team() {
     inquirer.prompt([
         {
@@ -67,7 +68,7 @@ function team() {
         } else (outputTeam());
     });
 };
-
+//engineer spec questions
 function engineer() {
     inquirer.prompt([
         {
@@ -97,7 +98,7 @@ function engineer() {
         team();
     });
 };
-
+//intern spec questions
 function intern() {
     inquirer.prompt([
         {
@@ -127,7 +128,7 @@ function intern() {
         team();
     });
 };
-
+//file writing function
 function outputTeam() {
     if (!fs.existsSync(OUTPUT_DIR)) {
         fs.mkdirSync(OUTPUT_DIR)
